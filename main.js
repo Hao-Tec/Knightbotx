@@ -112,6 +112,7 @@ const channelInfo = {
 };
 
 async function handleMessages(sock, messageUpdate, printLog) {
+    let chatId = null;   // Moved declaration of chatId outside try block
     try {
         const { messages, type } = messageUpdate;
         if (type !== 'notify') return;
@@ -130,7 +131,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             return;
         }
 
-        const chatId = message.key.remoteJid;
+        chatId = message.key.remoteJid; // Assign chatId here
         const senderId = message.key.participant || message.key.remoteJid;
         const isGroup = chatId.endsWith('@g.us');
 
